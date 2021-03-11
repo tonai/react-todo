@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
+
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import Todo from "../Todo/Todo";
 
@@ -7,7 +9,7 @@ import "./App.css";
 function App() {
   const [done, setDone] = useState("");
   const [title, setTitle] = useState("");
-  const [todos, setTodos] = useState([
+  const [todos, setTodos] = useLocalStorage('todos', [
     {
       title: "Créer une todo list",
       done: false,
