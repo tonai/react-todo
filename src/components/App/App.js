@@ -15,6 +15,10 @@ function App() {
     },
   ]);
 
+  function getId() {
+    return Math.max(...todos.map(todo => todo.id)) + 1;
+  }
+
   function handleEdit(id, title) {
     setTodos((prevState) =>
       prevState.map((todo) =>
@@ -43,7 +47,7 @@ function App() {
       clone.push({
         title: title,
         done: false,
-        id: todos.length + 1,
+        id: getId(),
       });
       return clone;
     });
