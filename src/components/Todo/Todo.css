@@ -1,0 +1,45 @@
+.Todo {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.Todo__toggle {
+  width: 40px;
+}
+
+.Todo__title {
+  display: flex;
+  flex: 1;
+}
+
+.Todo__title--done {
+  text-decoration: line-through;
+}
+
+.Todo__title-text {
+  background-color: transparent;
+  border-color: transparent;
+  flex: 1;
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.Todo__title-edit {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.Todo__title-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 20px;
+  width: 100%;
+}
+
+.Todo__remove {
+  width: 40px;
+}

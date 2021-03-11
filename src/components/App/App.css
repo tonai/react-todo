@@ -1,0 +1,22 @@
+.App {
+  max-width: 500px;
+  width: 80%;
+}
+
+.App__input {
+  box-sizing: border-box;
+  height: 40px;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  font-size: 20px;
+  width: 100%;
+}
+
+.App__list {
+  margin-bottom: 20px;
+}
+
+.App__footer {
+  display: flex;
+  justify-content: space-between;
+}
