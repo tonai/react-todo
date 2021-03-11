@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { animated, useTransition } from "react-spring";
 
 import Todo from "../Todo/Todo";
 
@@ -14,6 +15,23 @@ function App() {
       id: 1,
     },
   ]);
+
+  const filteredTodos = todos.filter(
+    (todo) =>
+      done === "" ||
+      (done === "todo" && todo.done === false) ||
+      (done === "done" && todo.done === true)
+  );
+  const transitions = useTransition(filteredTodos, (todos) => todos.id, {
+    config: {
+      mass: 1,
+      tension: 200,
+      friction: 15,
+    },
+    from: { transform: "translateX(-100%)", opacity: 0 },
+    enter: { transform: "translateX(0%)", opacity: 1 },
+    leave: { transform: "translateX(100%)", opacity: 0 },
+  });
 
   function getId() {
     return Math.max(...todos.map(todo => todo.id)) + 1;
@@ -71,14 +89,8 @@ function App() {
     );
   }
 
-  const list = todos
-    .filter(
-      (todo) =>
-        done === "" ||
-        (done === "todo" && todo.done === false) ||
-        (done === "done" && todo.done === true)
-    )
-    .map((todo) => (
+  const list = transitions.map(({ item: todo, props, key }) => (
+    <animated.div key={key} style={props}>
       <Todo
         key={todo.id}
         onEdit={handleEdit}
@@ -86,19 +98,26 @@ function App() {
         onToggle={handleToggle}
         todo={todo}
       />
-    ));
+    </animated.div>
+  ));
 
-  const todosToDo = todos.filter(todo => !todo.done);
+  const todosToDo = todos.filter((todo) => !todo.done);
 
   return (
     <div className="App">
       <h1>What needs to be done ?</h1>
       <form onSubmit={handleSubmit}>
-        <input className="App__input" onChange={handleTitleChange} value={title} />
+        <input
+          className="App__input"
+          onChange={handleTitleChange}
+          value={title}
+        />
       </form>
       <div className="App__list">{list}</div>
       <div className="App__footer">
-        <span>{todosToDo.length} items left / {todos.length}</span>
+        <span>
+          {todosToDo.length} items left / {todos.length}
+        </span>
         <span>
           <label>
             All
